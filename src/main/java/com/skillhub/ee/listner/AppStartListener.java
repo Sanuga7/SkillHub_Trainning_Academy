@@ -10,8 +10,8 @@ import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @WebListener
 public class AppStartListener implements ServletContextListener {
@@ -20,10 +20,10 @@ public class AppStartListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
 
         ServletContext context = sce.getServletContext();
-        Map<String, User> userMap = new HashMap<>();
-        Map<String, Course> courseMap = new HashMap<>();
-        Map<String, Enrolment> enrolmentMap = new HashMap<>();
-        Map<String, AttendanceRecord> attendanceRecordMap = new HashMap<>();
+        Map<String, User> userMap = new ConcurrentHashMap<>();
+        Map<String, Course> courseMap = new ConcurrentHashMap<>();
+        Map<String, Enrolment> enrolmentMap = new ConcurrentHashMap<>();
+        Map<String, AttendanceRecord> attendanceRecordMap = new ConcurrentHashMap<>();
 
         userMap.put("Sanuga", new User("Sanuga", "Sanuga", "Kusalwin", "2006", "ADMIN"));
         userMap.put("Nimal", new User("Nimal", "Nimal", "Perera", "2002", "TRAINER"));

@@ -10,7 +10,17 @@
 <head>
     <title>SkillHub | Home</title>
 </head>
-<body>
+<%
 
+    HttpSession logged = request.getSession(false);
+
+    if (logged == null || logged.getAttribute("loggedUser") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+
+%>
+<body>
+    <h1>Welcome to SkillHub..!</h1>
 </body>
 </html>
