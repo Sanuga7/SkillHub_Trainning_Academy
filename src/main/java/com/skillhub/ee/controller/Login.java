@@ -29,15 +29,13 @@ public class Login extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("loggedUser", user);
 
-            switch (user.getRole()) {
-                case "ADMIN" -> resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
-                case "TRAINER" -> resp.sendRedirect(req.getContextPath() + "/trainer/dashboard");
-                case "USER" -> resp.sendRedirect(req.getContextPath() + "/dashboard");
-                default -> {
-                    req.setAttribute("error", "Something Went Wrong");
-                    req.getRequestDispatcher("/login.jsp").forward(req, resp);
-                }
+            if(!user.getRole().isEmpty()){
+                resp.sendRedirect(req.getContextPath()+"/dashboard");
+            }else{
+                req.setAttribute("error", "Something Went Wrong");
+                req.getRequestDispatcher("/login.jsp").forward(req, resp);
             }
+
         }else{
             req.setAttribute("error", "Invalid Credentials");
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
